@@ -186,3 +186,19 @@
   position: absolute;
   top: 5%;
 }
+
+.Participants {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  // border: 2px solid red;
+  p {
+    // border: 2px solid green;
+    justify-self: center;
+    align-self: center;
+    margin: auto 0;
+    margin-right: 10px;
+  }
+}
