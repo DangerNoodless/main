@@ -188,6 +188,9 @@ app.post('/api', eventController.addEvent, (req, res) => {
   // return res.status(200).send('test-server-return')
 })
 
+
+ 
+
 app.put('/attend', userController.goingButton, (req, res) => {
   res.status(200).send('database updated');
 });
@@ -197,6 +200,19 @@ app.put('/attend', userController.goingButton, (req, res) => {
 // test cookie set
 
 // get all events
+app.get('/filterEvent',(req,res)=>{
+  return res.status(200).send([{
+    
+      eventname: "michael's birthday",
+      date: '2022-08-17',
+      imgsrc:"https://i.etsystatic.com/11765727/r/il/0e6919/3140639406/il_570xN.3140639406_bvez.jpg"
+      ,
+      time:'8:30 PM',
+      location:'michael"s house ',
+      eventdescription: 'lets party !!!'
+    }]
+  )
+})
 
 app.get('/getEvent', eventController.getEvents, (req, res) => {
   

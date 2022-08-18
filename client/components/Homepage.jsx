@@ -17,6 +17,7 @@ const Homepage = ({ user, setUser }) => {
   const urlParams = new URLSearchParams(queryString);
 
   const username = urlParams.get('username');
+  const [searchText,changeText] = useState('');
 
 
   let navigate = useNavigate();
@@ -27,8 +28,8 @@ const Homepage = ({ user, setUser }) => {
       username: username
     })
 
-      .then(res => updateArray(res.data));
-
+      .then((res) => updateArray(res.data));
+     
   }, []);
 
   // useEffect(() => {
@@ -46,13 +47,59 @@ const Homepage = ({ user, setUser }) => {
       .then(res => updateArray(res.data));
 
   };
-  console.log(renderArray);
 
-  console.log('USER IN HOMEPAGE', user);
+
+  
+//enter the search text
+//click get event 
+//send get request to  /filterEvent
+//get the filtered data update the array
+  const getEvent =()=>{
+   const output=[]
+   const newarray=[...renderArray]
+   for(let i=0;i<newarray.length;i++){
+     
+    if(newarray[i].eventname.toLowerCase().includes(searchText.toLowerCase())){
+      output.push(newarray[i]);
+    }
+   }
+updateArray(output);
+  // axios.get('http://localhost:8080/filterEvent', {
+  //   searchText: searchText
+  // })
+
+  //   // .then(res => updateArray(res.data));
+  //   .then(res=>updateArray(res.data))
+  }
+  
+ const prevArray = JSON.parse(JSON.stringify(renderArray));
+
+
+
+  const updateText = (e)=>{
+
+    changeText(e.target.value);
+
+  }
+  const goBack = ()=>{
+
+    axios.get('http://localhost:8080/getEvent')
+
+    .then(res => updateArray(res.data));
+  }
 
   return (
     <div className="contents">
       <ResponsiveAppBar user={user} setUser={setUser} />
+      <div className='d-flex justify-content-center'>
+      <div className='d-flex mt-5 justify-content-center ' style={{width:"400px"}}>
+      
+        <input onKeyUp={updateText} name={searchText} className="form-control me-2" type="search" placeholder="Search Event" aria-label="Search"/>
+        <button onClick={getEvent} className="btn btn-outline-success" type="submit" >Search</button>
+        <button onClick={goBack} className="btn btn-outline-primary ms-2"  >Back</button>
+    
+      </div>
+      </div>
 
 
       <div className='eventBox'>
