@@ -2,8 +2,46 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios';
 
+import Button from '@mui/material/Button'
+
+import EventListModal from './EventListModal';
 
 const Events = (props) => {
+  // const [eventArray, setEventArray] = useState([]);
+
+  let eventArray = [];
+
+  async function getEventArray(event) {
+    // console.log('EVENT ARRAY', eventArray);
+    const postBody = {
+      eventName: props.cards.eventName
+    };
+
+    // // console.log('POST BODY', postBody);
+
+    const postOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postBody)
+    };
+
+    await fetch('/going', postOptions)
+      .then((data) => data.json())
+      .then((data) => eventArray = data)
+      .catch((error) => {
+        // console.log(error);
+
+        console.log('THIS IS THE ERROR', error);
+
+
+        
+        return alert('Failed to get the list of events');
+      });
+  }
+
+
 
 const [pop,setPop] = useState('none')
 const [inorout,changeInOut] = useState(true);
@@ -59,7 +97,24 @@ const attend = () =>{
     <h5 className="card-title fs-2">Events Name</h5>
     {/* grab data from database with name/data/number people attend */}
     <p className="card-text fs-2">{props.cards.eventname}</p>
-    <p className="card-text">{props.cards.participants} Participants</p>    
+    <div className="Participants">
+      <p className="card-text">{props.cards.participants} Participants</p>    
+      {/* <Button
+          type="submit"
+          onClick={getEventArray}
+          variant="contained"
+          sx={{
+            width: '30%',
+            // padding: '1rem 0'
+            marginLeft: '20px',
+            height: '30px'
+          }}
+        >
+          See Who's Going
+      </Button> */}
+
+      <EventListModal eventArray={eventArray} getEventArray={getEventArray} />
+    </div>
     <p className="card-text fs-4"><img src="https://www.technipages.com/wp-content/uploads/2020/10/fix-google-maps-not-updating-location-600x341.png" alt="" style={{width:'50px'}}/>{props.cards.location}</p>
     <p className="card-text fs-4"> <img src="https://storage.needpix.com/rsynced_images/clock-4314041_1280.jpg" alt="" style={{width:'50px'}}/>{props.cards.date} / {props.cards.time}</p>
     <button  onClick={attend} className={attendBTN}>{inoroutText}</button>

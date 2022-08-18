@@ -29,19 +29,19 @@ const Login = ({ user, setUser }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  // let banner;
+  let banner;
 
   // let banner = setInterval(() => {
   //   document.querySelector('#banner').setAttribute('src', banners[randomBannerIndex++ % banners.length]);
 
-  //   // fetch('https://dog.ceo/api/breeds/image/random')
-  //   //   .then((response) => response.json())
-  //   //   .then((data) => {
-  //   //     // document.querySelector('banner').forEach((image) => {
-  //   //     //   image.setAttribute('src', data.message);
-  //   //     // });
-  //   //     document.querySelector('#banner').setAttribute('src', data.message);
-  //   //   });
+  // //   // fetch('https://dog.ceo/api/breeds/image/random')
+  // //   //   .then((response) => response.json())
+  // //   //   .then((data) => {
+  // //   //     // document.querySelector('banner').forEach((image) => {
+  // //   //     //   image.setAttribute('src', data.message);
+  // //   //     // });
+  // //   //     document.querySelector('#banner').setAttribute('src', data.message);
+  // //   //   });
   // }, 3000);
 
   // dummy data
@@ -102,6 +102,22 @@ const Login = ({ user, setUser }) => {
   useEffect(() => {
     console.log('USER IN LOGIN PAGE', user);
 
+  }, []);
+
+  useEffect(() => {
+    banner = setInterval(() => {
+      document.querySelector('#banner').setAttribute('src', banners[randomBannerIndex++ % banners.length]);
+
+      //   // fetch('https://dog.ceo/api/breeds/image/random')
+      //   //   .then((response) => response.json())
+      //   //   .then((data) => {
+      //   //     // document.querySelector('banner').forEach((image) => {
+      //   //     //   image.setAttribute('src', data.message);
+      //   //     // });
+      //   //     document.querySelector('#banner').setAttribute('src', data.message);
+      //   //   });
+    }, 3000);
+    return () => clearInterval(banner);
   }, []);
 
 
@@ -437,7 +453,7 @@ const Login = ({ user, setUser }) => {
 
 
       <div className="SpeedDial">
-        <SpeedDialTooltipOpen />
+        <SpeedDialTooltipOpen banner={banner} />
       </div>
 
     </div>

@@ -13,6 +13,7 @@ const Homepage = ({ user, setUser }) => {
   const [renderArray, updateArray] = useState([]);
   const [index, addIndex] = useState(4);
 
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
@@ -30,6 +31,15 @@ const Homepage = ({ user, setUser }) => {
       .then(res => updateArray(res.data));
 
   }, []);
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:8080/going', {
+  //     theEvent: 
+  //   })
+
+  //   .then(res => updateArray(res.data));
+
+  // }, []);
 
   // useEffect(() => {
   //   if (!user) navigate('/');
