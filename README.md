@@ -65,6 +65,9 @@ INSERT INTO eventinfo (eventTitle, eventDate, eventTime, imageLink, eventAddress
 
   ('Watergun Fight', '27 Aug 2022', 'T16:00:00', 'https://images.dailyhive.com/20160810195402/watergun.jpg', '4730 Crystal Springs Dr, Los Angeles, CA 90027', 'This is going to be the biggest watergun fight ever assembled.  Sponsered by guinness book of world records.', 'emmanuelMacron', 3);
 
+  ('Madeon Dj Set', '27 Aug 2022', 'T22:00:00', 'https://d3vhc53cl8e8km.cloudfront.net/hello-staging/wp-content/uploads/2022/08/09233143/SnPk2BfCuPaJNRFFDLYcZEtKBs0vFYqsr1PWB5pV-972x597.jpeg', '6021 Hollywood Blvd.
+Los Angeles, CA 90028', 'Straight from his emotionally charged set at HARD Events Summer, Madeon makes his Academy LA debut with a special DJ Set Saturday, 8/27' ,'theloner', 1);
+
 
 INSERT INTO allEvents (theEvent, theUser) VALUES
     ('Haul & Oats Concert', 'miketyson' ),
@@ -150,5 +153,12 @@ UPDATE allEvents SET participants = (SELECT participants FROM eventinfo WHERE ev
 
 SELECT _id FROM users WHERE name = $1
 
+select * FROM allEvents where theevent = 'Lakers vs Clippers';
 
 UPDATE eventinfo SET participants = (SELECT participants FROM eventinfo WHERE eventTitle = 'Holloween Party'  ) + 1 WHERE eventTitle = 'Holloween Party' ;
+
+
+
+INSERT INTO eventinfo (eventTitle, eventDate, eventTime, imageLink, eventAddress, eventDescription, theUser, participants) VALUES
+  ('Madeon Dj Set', '27 Aug 2022, 'T22:00:00', 'https://d3vhc53cl8e8km.cloudfront.net/hello-staging/wp-content/uploads/2022/08/09233143/SnPk2BfCuPaJNRFFDLYcZEtKBs0vFYqsr1PWB5pV-972x597.jpeg', '6021 Hollywood Blvd.
+Los Angeles, CA 90028', 'Straight from his emotionally charged set at HARD Events Summer, Madeon makes his Academy LA debut with a special DJ Set Saturday, 8/27' ,'theloner', 1),
