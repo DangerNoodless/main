@@ -114,6 +114,31 @@ userController.goingButton = (req, res, next) => {
         })
       })
 
+userController.who = (req, res, next) => {
+  console.log('entered who');
+  const {theEvent} = req.body;
+  const goingQuery = [theEvent];
+  let queryText = 'SELECT * FROM allevents WHERE theevent = $1;'
+  
+  db.query(queryText, goingQuery)
+        .then(data => {
+          console.log(data.rows)
+          console.log('what is rows');
+          let whoArr = [];
+          data.rows.forEach(el => {
+            whoArr.push(el.theuser);
+          })
+          res.locals.myList = whoArr
+          console.log(whoArr);
+          return next()
+        })
+        .catch((err) => {
+          return next({
+            log: 'Express error handler caught goingButton error.  Unable to add/delete row from allEvents',
+            status: 401,
+            message: {err: err },
+          })
+        })
 };
 
 
