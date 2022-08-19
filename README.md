@@ -40,7 +40,6 @@ CREATE Table public.friends (
 
 
 
-
 INSERT INTO public."users" (username, password, firstName, lastName) VALUES
   ('miketyson', 'boxer', 'Mike', 'Tyson'),
   ('emmanuelMacron', 'crepes', 'Emmanuel', 'Macron'),

@@ -13,7 +13,6 @@ export default function InsetList({ eventArray }) {
 
   // eventArray = ['emmanuelMacron', 'johndoe1234', 'theloner'];
 
-
   return (
     <List
       sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}

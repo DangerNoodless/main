@@ -113,10 +113,12 @@ userController.goingButton = (req, res, next) => {
           message: {err: err },
         })
       })
+    }
 
 userController.who = (req, res, next) => {
   console.log('entered who');
   const {theEvent} = req.body;
+  console.log('this is the who reqbody', req.body);
   const goingQuery = [theEvent];
   let queryText = 'SELECT * FROM allevents WHERE theevent = $1;'
   
@@ -145,7 +147,7 @@ userController.who = (req, res, next) => {
 
 
 
+
 // userController.attendEvent = {req, res, next}
 
 module.exports = userController;
-
