@@ -20,15 +20,18 @@ const style = {
 
 export default function BasicModal({ eventArray, getEventArray }) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = async () => {
-    if (!getEventArray()) {
-      return setOpen(true);
-    }
-    // return setOpen(true);
+  const handleOpen = () => {
+    getEventArray();
+    // if (!getEventArray()) {
+    //   return setOpen(true);
+    // }
+    return setOpen(true);
     // .then(() => setOpen(true))
     // .catch(err => console.log(err));
   };
   const handleClose = () => setOpen(false);
+
+  // console.log('MIDDLE eventArray', eventArray);
 
   return (
     <div>

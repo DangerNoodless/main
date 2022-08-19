@@ -7,14 +7,14 @@ import Button from '@mui/material/Button'
 import EventListModal from './EventListModal';
 
 const Events = (props) => {
-  // const [eventArray, setEventArray] = useState([]);
+  const [eventArray, setEventArray] = useState([]);
 
-  let eventArray = [];
+  // let eventArray = [];
 
   async function getEventArray(event) {
     // console.log('EVENT ARRAY', eventArray);
     const postBody = {
-      eventName: props.cards.eventName
+      theEvent: props.cards.eventname
     };
 
     // // console.log('POST BODY', postBody);
@@ -28,10 +28,17 @@ const Events = (props) => {
     };
 
     await fetch('/going', postOptions)
-      .then((data) => data.json())
-      .then((data) => eventArray = data)
+      .then((data) => {
+        console.log('DATA /GOING FIRST THEN', data)
+        return data.json()
+      })
+      .then((data) => {
+        console.log('data /GOING SECOND THEN', data)
+        setEventArray(data);
+        // eventArray = [...data];
+        return true;
+      })
       .catch((error) => {
-        // console.log(error);
 
         console.log('THIS IS THE ERROR', error);
 
@@ -113,7 +120,7 @@ const attend = () =>{
           See Who's Going
       </Button> */}
 
-      <EventListModal eventArray={eventArray} getEventArray={getEventArray} />
+      <EventListModal eventArray={eventArray} getEventArray={getEventArray} setEventArray={setEventArray} />
     </div>
     <p className="card-text fs-4"><img src="https://www.technipages.com/wp-content/uploads/2020/10/fix-google-maps-not-updating-location-600x341.png" alt="" style={{width:'50px'}}/>{props.cards.location}</p>
     <p className="card-text fs-4"> <img src="https://storage.needpix.com/rsynced_images/clock-4314041_1280.jpg" alt="" style={{width:'50px'}}/>{props.cards.date} / {props.cards.time}</p>
